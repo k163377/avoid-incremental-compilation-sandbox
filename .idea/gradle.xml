@@ -7,6 +7,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/compiler-plugin" />
+            <option value="$PROJECT_DIR$/gradle-plugin" />
+            <option value="$PROJECT_DIR$/integration-test" />
+            <option value="$PROJECT_DIR$/integration-test/sample" />
+            <option value="$PROJECT_DIR$/runtime-api" />
           </set>
         </option>
         <option name="myGradleHome" value="" />
