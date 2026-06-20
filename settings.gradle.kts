@@ -1,3 +1,18 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.wrongwrong.aics") {
+                useModule("org.wrongwrong:gradle-plugin:${requested.version ?: "1.0-SNAPSHOT"}")
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
@@ -8,6 +23,6 @@ include(
     ":compiler-plugin",
     ":gradle-plugin",
     ":runtime-api",
-    ":integration-test",
-    ":integration-test:sample",
 )
+
+includeBuild("integration-test")
