@@ -3,6 +3,8 @@ package org.wrongwrong.aics.compiler
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
+import org.jetbrains.kotlin.cli.common.messages.MessageCollector
+import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 import org.wrongwrong.aics.compiler.fir.PluginFirExtensionRegistrar
@@ -16,6 +18,7 @@ class PluginRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         val group = configuration.get(KEY_GROUP) ?: error("group is required for this plugin")
         FirExtensionRegistrarAdapter.registerExtension(PluginFirExtensionRegistrar(group))
-        IrGenerationExtension.registerExtension(PluginIrGenerationExtension(group))
+        val messageCollector = configuration.get(CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+        IrGenerationExtension.registerExtension(PluginIrGenerationExtension(group, messageCollector))
     }
 }
